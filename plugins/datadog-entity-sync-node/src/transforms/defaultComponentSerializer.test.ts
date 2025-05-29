@@ -2,7 +2,7 @@ import { cloneDeep } from 'lodash';
 
 import type { EntityV3Service } from '@datadog/datadog-api-client/dist/packages/datadog-api-client-v2';
 
-import type { Entity } from '@backstage/catalog-model/index';
+import type { Entity } from '@backstage/catalog-model';
 
 import type { ExtraSerializationInfo } from './defaultComponentSerializer';
 import { defaultComponentSerializer } from './defaultComponentSerializer';

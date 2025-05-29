@@ -3,7 +3,6 @@
   "ignoreDependencies": [
     "app",
     "better-sqlite3",
-    "eslint-plugin-prettier",
     "jest-canvas-mock",
     "node-gyp"
   ],
