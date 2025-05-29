@@ -1,7 +1,7 @@
 import type { SchedulerServiceTaskScheduleDefinition } from '@backstage/backend-plugin-api';
 import { createExtensionPoint } from '@backstage/backend-plugin-api';
-import type { EntityFilterQuery } from '@backstage/catalog-client/index';
-import type { HumanDuration } from '@backstage/types/index';
+import type { EntityFilterQuery } from '@backstage/catalog-client';
+import type { HumanDuration } from '@backstage/types';
 
 import type { DatadogServiceFromEntitySyncOptions } from './services/DatadogServiceFromEntitySync';
 
