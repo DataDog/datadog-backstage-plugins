@@ -21,5 +21,7 @@ jobs:
         uses: jdx/mise-action@d20b46e041ee9e28e7b67d713f4df93a72358b54
       - name: install-dependencies
         run: yarn install
+      - name: enable-corepack
+        run: corepack enable
       - name: verify-project
         run: yarn verify
