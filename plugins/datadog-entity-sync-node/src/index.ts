@@ -15,3 +15,4 @@ export type {
 } from './extensions';
 export type { ExtraSerializationInfo } from './transforms/defaultComponentSerializer';
 export { defaultComponentSerializer } from './transforms/defaultComponentSerializer';
+export { defaultEntitySerializer } from './transforms/defaultEntitySerializer';
