@@ -1,17 +1,16 @@
+import { v2 } from '@datadog/datadog-api-client';
+
 import { mockServices } from '@backstage/backend-test-utils';
 import { catalogServiceMock } from '@backstage/plugin-catalog-node/testUtils';
 
-import { defaultEntitySerializer } from '../transforms/defaultEntitySerializer';
-import type { DatadogCatalogApi } from '@cvent/backstage-plugin-datadog-entity-sync-node';
+import { defaultComponentSerializer } from '../transforms/defaultComponentSerializer';
 
 import { DatadogServiceFromEntitySync } from './DatadogServiceFromEntitySync';
 
-const MockedDatadogCatalogApi = jest.fn<DatadogCatalogApi, []>(
-  () =>
-  ({
-    upsertCatalogEntity: jest.fn().mockResolvedValue({}),
-  } as any),
-);
+const MockedSoftwareCatalogApi =
+  v2.SoftwareCatalogApi as jest.Mock<v2.SoftwareCatalogApi>;
+
+jest.mock('@datadog/datadog-api-client');
 
 const MOCKED_ENTITIES = [
   {
@@ -40,14 +39,10 @@ const MOCKED_ENTITIES = [
 ].flatMap(entity => Array<typeof entity>(7).fill(entity));
 
 const DEFAULT_RESPONSE = {
-  apiVersion: 'backstage.io/v1alpha1',
-  kind: 'Component',
+  apiVersion: 'v3',
+  kind: 'service',
   metadata: {
     name: 'datadog-example-apm-service',
-    annotations: {
-      'datadoghq.com/service-name': 'datadog-example-apm-service',
-      'backstage.io/techdocs-ref': './',
-    },
     links: [
       {
         name: 'Backstage',
@@ -62,21 +57,12 @@ const DEFAULT_RESPONSE = {
         url: 'https://backstage/docs/default/Component/datadog-example-apm-service',
       },
     ],
-    tags: [],
+    tags: ['system:datadog-example'],
     owner: 'example-team',
-    title: 'Datadog Apm Service',
   },
   spec: {
     lifecycle: 'experimental',
-    type: 'service',
-    system: 'datadog-example',
   },
-  relations: [
-    {
-      type: 'ownedBy',
-      targetRef: 'group:default/example-team',
-    },
-  ],
 };
 
 describe('DatadogServiceFromEntitySync', () => {
@@ -87,7 +73,7 @@ describe('DatadogServiceFromEntitySync', () => {
   describe('with a custom serializer', () => {
     const sync = new DatadogServiceFromEntitySync(
       {
-        datadog: new MockedDatadogCatalogApi(),
+        datadog: new MockedSoftwareCatalogApi(),
         catalog: catalogServiceMock({ entities: MOCKED_ENTITIES }),
         auth: mockServices.auth.mock(),
         events: mockServices.events.mock(),
@@ -103,7 +89,7 @@ describe('DatadogServiceFromEntitySync', () => {
           },
         }),
         serialize: entity =>
-          defaultEntitySerializer(entity, {
+          defaultComponentSerializer(entity, {
             appBaseUrl: 'https://backstage',
           }),
         rateLimit: {
@@ -126,7 +112,7 @@ describe('DatadogServiceFromEntitySync', () => {
   describe('with the default serializer', () => {
     const sync = new DatadogServiceFromEntitySync(
       {
-        datadog: new MockedDatadogCatalogApi(),
+        datadog: new MockedSoftwareCatalogApi(),
         catalog: catalogServiceMock({ entities: MOCKED_ENTITIES }),
         auth: mockServices.auth.mock(),
         events: mockServices.events.mock(),
