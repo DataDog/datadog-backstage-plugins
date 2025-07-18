@@ -113,7 +113,7 @@ const defaultResourceEntity: ResourceEntity = {
 };
 
 const defaultExtraInfo: ExtraSerializationInfo = {
-    appBaseUrl: 'https://backstage.example.com',
+    appBaseUrl: 'https://backstage',
 };
 
 describe('defaultEntitySerializer', () => {
@@ -215,7 +215,7 @@ describe('defaultEntitySerializer', () => {
                         name: 'Backstage',
                         type: 'doc',
                         provider: 'backstage',
-                        url: 'https://backstage.example.com/catalog/default/Component/mocked-service',
+                        url: 'https://backstage/catalog/default/Component/mocked-service',
                     },
                 ])
             );
@@ -235,7 +235,7 @@ describe('defaultEntitySerializer', () => {
                         name: 'TechDocs',
                         type: 'doc',
                         provider: 'backstage',
-                        url: 'https://backstage.example.com/docs/default/Component/mocked-service',
+                        url: 'https://backstage/docs/default/Component/mocked-service',
                     },
                 ])
             );

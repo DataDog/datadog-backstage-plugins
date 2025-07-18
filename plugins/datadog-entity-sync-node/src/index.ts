@@ -1,5 +1,5 @@
 export { datadogEntityRef } from './datadogSoftwareCatalogApi';
-export type { DatadogEntityDefinition } from './datadogSoftwareCatalogApi';
+export type { DatadogEntityDefinition, DatadogCatalogApi } from './datadogSoftwareCatalogApi';
 export { BaseScheduledSync } from './BaseScheduledSync';
 export type { BaseScheduledSyncOptions } from './BaseScheduledSync';
 export { byChunk, valueGuard } from './utils/byChunk';
