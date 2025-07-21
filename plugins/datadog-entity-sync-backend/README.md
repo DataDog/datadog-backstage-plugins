@@ -24,22 +24,22 @@ backend.add(import('@cvent/backstage-plugin-datadog-entity-sync-backend'));
 Here is an example configuration that you can leverage:
 
 ```yaml
+events:
+  http:
+    topics:
+      # This name must match the sync name defined below and in the extension
+      - datadog-entity-sync.datadog-entities-from-catalog
+
 datadog:
   integration:
     apiKey: ${DD_API_KEY}
     appKey: ${DD_APP_KEY}
     site: 'datadoghq.com' # Optional: Defaults to 'datadoghq.com'
-events:
-  http:
-    topics:
-      # This name must match the sync name defined below and in the extension
-      - datadog-entity-sync.datadog-service-from-component
-datadog:
   sync:
     # This name must match the topic part name above and in the extension
-    datadog-service-from-component:
+    datadog-entities-from-catalog:
       entityFilter:
-        kind: component
+        kind: ["component", "api", "system", "resource"]
         # Adjust to your identifier in Datadog
         metadata.annotations.datadoghq.com/service-name: CATALOG_FILTER_EXISTS
       rateLimit:
@@ -260,3 +260,7 @@ If you want to run the entire project, including the frontend, run:
 # From the root directory
 yarn start
 ```
+
+## Troubleshooting
+
+Ensure that your node version is v22 or higher. 
