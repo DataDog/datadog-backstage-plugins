@@ -6,12 +6,12 @@ import {
 import type { DatadogEntitySyncConfig } from '@cvent/backstage-plugin-datadog-entity-sync-node';
 import {
   datadogEntitySyncExtensionPoint,
-  defaultComponentSerializer,
+  defaultEntitySerializer,
 } from '@cvent/backstage-plugin-datadog-entity-sync-node';
 
-const SYNC_ID = 'datadog-service-from-component';
+const SYNC_ID = 'datadog-entities-from-catalog';
 
-export const datadogServiceFromComponentSerializer = createBackendModule({
+export const datadogEntitySyncSerializer = createBackendModule({
   pluginId: 'datadog-entity-sync',
   moduleId: SYNC_ID,
   register(registrar) {
@@ -29,7 +29,7 @@ export const datadogServiceFromComponentSerializer = createBackendModule({
         datadogSync.defineSerializer({
           syncId: SYNC_ID,
           entityFilter,
-          serialize: defaultComponentSerializer,
+          serialize: entity => JSON.stringify(defaultEntitySerializer(entity)),
           rateLimit,
           enabled,
           taskRunner: scheduler.createScheduledTaskRunner(schedule),

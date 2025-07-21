@@ -3,7 +3,7 @@ import { v2 } from '@datadog/datadog-api-client';
 import { mockServices } from '@backstage/backend-test-utils';
 import { catalogServiceMock } from '@backstage/plugin-catalog-node/testUtils';
 
-import { defaultComponentSerializer } from '../transforms/defaultComponentSerializer';
+import { defaultEntitySerializer } from '../transforms/defaultEntitySerializer';
 
 import { DatadogServiceFromEntitySync } from './DatadogServiceFromEntitySync';
 
@@ -39,30 +39,43 @@ const MOCKED_ENTITIES = [
 ].flatMap(entity => Array<typeof entity>(7).fill(entity));
 
 const DEFAULT_RESPONSE = {
-  apiVersion: 'v3',
-  kind: 'service',
+  apiVersion: 'backstage.io/v1alpha1',
+  kind: 'Component',
   metadata: {
     name: 'datadog-example-apm-service',
+    title: 'Datadog Apm Service',
+    annotations: {
+      'datadoghq.com/service-name': 'datadog-example-apm-service',
+      'backstage.io/techdocs-ref': './',
+    },
+    owner: 'example-team',
+    tags: [],
     links: [
       {
         name: 'Backstage',
-        provider: 'backstage',
         type: 'doc',
+        provider: 'backstage',
         url: 'https://backstage/catalog/default/Component/datadog-example-apm-service',
       },
       {
         name: 'TechDocs',
-        provider: 'backstage',
         type: 'doc',
+        provider: 'backstage',
         url: 'https://backstage/docs/default/Component/datadog-example-apm-service',
       },
     ],
-    tags: ['system:datadog-example'],
-    owner: 'example-team',
   },
   spec: {
+    type: 'service',
+    system: 'datadog-example',
     lifecycle: 'experimental',
   },
+  relations: [
+    {
+      type: 'ownedBy',
+      targetRef: 'group:default/example-team',
+    },
+  ],
 };
 
 describe('DatadogServiceFromEntitySync', () => {
@@ -89,9 +102,11 @@ describe('DatadogServiceFromEntitySync', () => {
           },
         }),
         serialize: entity =>
-          defaultComponentSerializer(entity, {
-            appBaseUrl: 'https://backstage',
-          }),
+          JSON.stringify(
+            defaultEntitySerializer(entity, {
+              appBaseUrl: 'https://backstage',
+            }),
+          ),
         rateLimit: {
           count: 2,
           interval: {
@@ -105,7 +120,9 @@ describe('DatadogServiceFromEntitySync', () => {
     it('returns expected public response', async () => {
       const syncedServices = await sync.sync();
 
-      expect(syncedServices).toEqual(Array(7).fill(DEFAULT_RESPONSE));
+      expect(syncedServices).toEqual(
+        Array(7).fill(JSON.stringify(DEFAULT_RESPONSE)),
+      );
     });
   });
 
@@ -144,7 +161,9 @@ describe('DatadogServiceFromEntitySync', () => {
         metadata: { ...DEFAULT_RESPONSE.metadata, links: [] },
       } as const;
 
-      expect(syncedServices).toEqual(Array(7).fill(mockedResponse));
+      expect(syncedServices).toEqual(
+        Array(7).fill(JSON.stringify(mockedResponse)),
+      );
     });
   });
 });

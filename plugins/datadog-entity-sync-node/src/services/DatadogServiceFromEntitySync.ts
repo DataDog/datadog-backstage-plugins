@@ -15,7 +15,7 @@ import type {
 } from '@cvent/backstage-plugin-datadog-entity-sync-node';
 import {
   BaseScheduledSync,
-  defaultComponentSerializer,
+  defaultEntitySerializer,
 } from '@cvent/backstage-plugin-datadog-entity-sync-node';
 
 import type { SyncConfig } from '../extensions';
@@ -35,7 +35,10 @@ export type SingleEntityFilterQuery<FIlter = EntityFilterQuery> =
 export interface DatadogServiceFromEntitySyncOptions<Preload = unknown>
   extends BaseScheduledSyncOptions,
     Omit<SyncConfig, 'schedule'> {
-  serialize?: (entity: Entity, preload: Preload) => DatadogEntityDefinition;
+  serialize?: (
+    entity: Entity,
+    preload: Preload,
+  ) => DatadogEntityDefinition | string;
   preload?: (clients: Clients, entities: Entity[]) => Promise<Preload>;
 }
 
@@ -173,8 +176,8 @@ export class DatadogServiceFromEntitySync<
   protected serialize(
     entity: Entity,
     _preload?: PreloadedData,
-  ): DatadogEntityDefinition {
-    return defaultComponentSerializer(entity);
+  ): DatadogEntityDefinition | string {
+    return JSON.stringify(defaultEntitySerializer(entity));
   }
 }
 
