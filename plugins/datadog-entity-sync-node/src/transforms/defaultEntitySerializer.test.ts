@@ -245,24 +245,6 @@ describe('defaultEntitySerializer', () => {
       );
     });
 
-    it('should include code locations when source-location is defined', () => {
-      mockedEntity.metadata.annotations = {
-        'backstage.io/source-location':
-          'url:https://github.com/example/repository/tree/main/services/my-service/',
-      };
-
-      const result = defaultEntitySerializer(mockedEntity, defaultExtraInfo);
-
-      expect(result.datadog).toEqual({
-        codeLocations: [
-          {
-            repositoryURL: 'https://github.com/example/repository',
-            paths: ['services/my-service/**'],
-          },
-        ],
-      });
-    });
-
     it('should handle links with unsupported types by defaulting to "other"', () => {
       mockedEntity.metadata.links = [
         {
@@ -388,16 +370,6 @@ describe('defaultEntitySerializer', () => {
 
       const tags = result.metadata.tags;
       expect(tags).toEqual(['tag1:value1', 'tag2:value2']);
-    });
-
-    it('should handle invalid source-location annotations gracefully', () => {
-      mockedEntity.metadata.annotations = {
-        'backstage.io/source-location': 'invalid-url',
-      };
-
-      const result = defaultEntitySerializer(mockedEntity);
-
-      expect(result.datadog).toBeUndefined();
     });
   });
 });

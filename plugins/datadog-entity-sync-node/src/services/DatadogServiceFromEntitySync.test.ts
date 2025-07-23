@@ -119,7 +119,7 @@ describe('DatadogServiceFromEntitySync', () => {
       const syncedServices = await sync.sync();
 
       expect(syncedServices).toEqual(
-        Array(7).fill(DEFAULT_RESPONSE),
+        Array(7).fill(JSON.stringify(DEFAULT_RESPONSE)),
       );
     });
   });
@@ -160,7 +160,7 @@ describe('DatadogServiceFromEntitySync', () => {
       } as const;
 
       expect(syncedServices).toEqual(
-        Array(7).fill(mockedResponse),
+        Array(7).fill(JSON.stringify(mockedResponse)),
       );
     });
   });

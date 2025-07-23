@@ -146,7 +146,7 @@ export class DatadogServiceFromEntitySync<
       });
       try {
         const entityTitle = entity.metadata.title ?? entity.metadata.name;
-        const service = this.serialize(entity, preload);
+        const service = JSON.stringify(this.serialize(entity, preload));
         assert(
           service,
           `The entity ${entityTitle} was unable to be processed.`,
@@ -160,7 +160,7 @@ export class DatadogServiceFromEntitySync<
           yield service;
         } else {
           yield await this.#clients.datadog.upsertCatalogEntity({
-            body: JSON.stringify(service),
+            body: service,
           });
         }
       } catch (err) {

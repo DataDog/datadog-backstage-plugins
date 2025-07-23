@@ -184,17 +184,5 @@ export function defaultEntitySerializer(
         owner: typeof ownerRef === 'string' ? ownerRef : parseEntityRef(ownerRef.targetRef).name,
       })),
     },
-    ...valueGuard(repoContext, repo => ({
-      datadog: {
-        codeLocations: [
-          {
-            repositoryURL: repo.repositoryURL,
-            ...valueGuard(repo.path, path => ({
-              paths: [path],
-            })),
-          },
-        ],
-      },
-    })),
   };
 }
