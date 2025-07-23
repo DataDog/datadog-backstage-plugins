@@ -34,7 +34,7 @@ export type SingleEntityFilterQuery<FIlter = EntityFilterQuery> =
 
 export interface DatadogServiceFromEntitySyncOptions<Preload = unknown>
   extends BaseScheduledSyncOptions,
-  Omit<SyncConfig, 'schedule'> {
+    Omit<SyncConfig, 'schedule'> {
   serialize?: (
     entity: Entity,
     preload: Preload,

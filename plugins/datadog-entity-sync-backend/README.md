@@ -72,7 +72,7 @@ backend.add(defaultEntitySerializer);
 
 ### Default Component Serializer
 
-Here is the implementation of the defaultComponentserializer:
+Here is the implementation of the defaultComponentSerializer:
 
 ```typescript
 import {

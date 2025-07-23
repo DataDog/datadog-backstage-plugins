@@ -181,7 +181,10 @@ export function defaultEntitySerializer(
     spec: {
       ...spec,
       ...valueGuard(specOwnerRef || entityOwnerRef, ownerRef => ({
-        owner: typeof ownerRef === 'string' ? ownerRef : parseEntityRef(ownerRef.targetRef).name,
+        owner:
+          typeof ownerRef === 'string'
+            ? ownerRef
+            : parseEntityRef(ownerRef.targetRef).name,
       })),
     },
   };
