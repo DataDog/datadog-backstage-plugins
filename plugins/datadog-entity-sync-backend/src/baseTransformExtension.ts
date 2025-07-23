@@ -29,7 +29,7 @@ export const datadogEntitySyncSerializer = createBackendModule({
         datadogSync.defineSerializer({
           syncId: SYNC_ID,
           entityFilter,
-          serialize: entity => JSON.stringify(defaultEntitySerializer(entity)),
+          serialize: entity => defaultEntitySerializer(entity),
           rateLimit,
           enabled,
           taskRunner: scheduler.createScheduledTaskRunner(schedule),

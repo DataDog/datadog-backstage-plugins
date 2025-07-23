@@ -63,16 +63,16 @@ In order to customize what entities are synced to Datadog and how the entities a
 This is the base extension point included in the `@cvent/backstage-plugin-datadog-entity-sync-backend` package. You can add it to your backend as follows:
 
 ```typescript
-import { defaultComponentSerializer } from '@cvent/backstage-plugin-datadog-entity-sync-backend';
+import { datadogEntitySyncSerializer } from '@cvent/backstage-plugin-datadog-entity-sync-backend';
 const backend = createBackend();
 // ...
 backend.add(import('@cvent/backstage-plugin-datadog-entity-sync-backend'));
-backend.add(defaultComponentSerializer);
+backend.add(defaultEntitySerializer);
 ```
 
-### Default Serializer
+### Default Component Serializer
 
-Here is the implementation of the default serializer:
+Here is the implementation of the defaultComponentserializer:
 
 ```typescript
 import {

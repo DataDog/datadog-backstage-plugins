@@ -34,11 +34,11 @@ export type SingleEntityFilterQuery<FIlter = EntityFilterQuery> =
 
 export interface DatadogServiceFromEntitySyncOptions<Preload = unknown>
   extends BaseScheduledSyncOptions,
-    Omit<SyncConfig, 'schedule'> {
+  Omit<SyncConfig, 'schedule'> {
   serialize?: (
     entity: Entity,
     preload: Preload,
-  ) => DatadogEntityDefinition | string;
+  ) => DatadogEntityDefinition | Entity;
   preload?: (clients: Clients, entities: Entity[]) => Promise<Preload>;
 }
 
@@ -160,7 +160,7 @@ export class DatadogServiceFromEntitySync<
           yield service;
         } else {
           yield await this.#clients.datadog.upsertCatalogEntity({
-            body: service,
+            body: JSON.stringify(service),
           });
         }
       } catch (err) {
@@ -176,8 +176,8 @@ export class DatadogServiceFromEntitySync<
   protected serialize(
     entity: Entity,
     _preload?: PreloadedData,
-  ): DatadogEntityDefinition | string {
-    return JSON.stringify(defaultEntitySerializer(entity));
+  ): DatadogEntityDefinition | Entity {
+    return defaultEntitySerializer(entity);
   }
 }
 

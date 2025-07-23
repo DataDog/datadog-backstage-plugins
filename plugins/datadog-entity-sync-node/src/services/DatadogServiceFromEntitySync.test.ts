@@ -48,7 +48,6 @@ const DEFAULT_RESPONSE = {
       'datadoghq.com/service-name': 'datadog-example-apm-service',
       'backstage.io/techdocs-ref': './',
     },
-    owner: 'example-team',
     tags: [],
     links: [
       {
@@ -69,6 +68,7 @@ const DEFAULT_RESPONSE = {
     type: 'service',
     system: 'datadog-example',
     lifecycle: 'experimental',
+    owner: 'example-team',
   },
   relations: [
     {
@@ -102,11 +102,9 @@ describe('DatadogServiceFromEntitySync', () => {
           },
         }),
         serialize: entity =>
-          JSON.stringify(
-            defaultEntitySerializer(entity, {
-              appBaseUrl: 'https://backstage',
-            }),
-          ),
+          defaultEntitySerializer(entity, {
+            appBaseUrl: 'https://backstage',
+          }),
         rateLimit: {
           count: 2,
           interval: {
@@ -121,7 +119,7 @@ describe('DatadogServiceFromEntitySync', () => {
       const syncedServices = await sync.sync();
 
       expect(syncedServices).toEqual(
-        Array(7).fill(JSON.stringify(DEFAULT_RESPONSE)),
+        Array(7).fill(DEFAULT_RESPONSE),
       );
     });
   });
@@ -162,7 +160,7 @@ describe('DatadogServiceFromEntitySync', () => {
       } as const;
 
       expect(syncedServices).toEqual(
-        Array(7).fill(JSON.stringify(mockedResponse)),
+        Array(7).fill(mockedResponse),
       );
     });
   });

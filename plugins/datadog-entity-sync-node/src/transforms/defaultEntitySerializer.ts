@@ -23,7 +23,7 @@ import { TECHDOCS_ANNOTATION } from '@backstage/plugin-techdocs-common';
 
 import { valueGuard } from '@cvent/backstage-plugin-datadog-entity-sync-node';
 
-function ensureComponent(
+function ensureEntity(
   entity: Entity | ComponentEntity | ApiEntity | SystemEntity | ResourceEntity,
 ): asserts entity is
   | ComponentEntity
@@ -154,10 +154,11 @@ export function defaultEntitySerializer(
   entity: Entity | ComponentEntity | ApiEntity | SystemEntity | ResourceEntity,
   extraInfo?: ExtraSerializationInfo,
 ) {
-  ensureComponent(entity);
+  ensureEntity(entity);
 
   const { metadata, spec } = entity;
   const repoContext = resolveRepositoryInfo(entity);
+  const specOwnerRef = spec.owner;
   const entityOwnerRef = getEntityRelationRefs(entity, RELATION_OWNED_BY).at(0);
 
   return {
@@ -169,9 +170,6 @@ export function defaultEntitySerializer(
       ...valueGuard(metadata.description, description => ({
         description,
       })),
-      ...valueGuard(entityOwnerRef, ownerRef => ({
-        owner: parseEntityRef(ownerRef.targetRef).name,
-      })),
       tags: [...labelsToTags(entity), ...(metadata.tags ?? [])],
       ...valueGuard(
         Array.from(getDatadogStyleLinks(entity, repoContext, extraInfo)),
@@ -182,6 +180,9 @@ export function defaultEntitySerializer(
     },
     spec: {
       ...spec,
+      ...valueGuard(specOwnerRef || entityOwnerRef, ownerRef => ({
+        owner: typeof ownerRef === 'string' ? ownerRef : parseEntityRef(ownerRef.targetRef).name,
+      })),
     },
     ...valueGuard(repoContext, repo => ({
       datadog: {

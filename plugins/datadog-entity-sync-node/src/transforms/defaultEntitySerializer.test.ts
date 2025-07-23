@@ -135,7 +135,6 @@ describe('defaultEntitySerializer', () => {
 
       expect(result).toBeDefined();
       expect(result.metadata.name).toBe('mocked-service');
-      expect(result.metadata.owner).toBe('mocked-team');
       expect(result.metadata.tags).toEqual(
         expect.arrayContaining(['tag1:value1', 'tag2:value2']),
       );
@@ -174,7 +173,7 @@ describe('defaultEntitySerializer', () => {
     it('should resolve owner from relations', () => {
       const result = defaultEntitySerializer(mockedEntity);
 
-      expect(result.metadata.owner).toBe('mocked-team');
+      expect(result.spec.owner).toBe('mocked-team');
     });
 
     it('should include links that are supported types', () => {
@@ -301,7 +300,7 @@ describe('defaultEntitySerializer', () => {
       expect(result).toBeDefined();
       expect(result.kind).toBe('API');
       expect(result.metadata.name).toBe('mocked-api');
-      expect(result.metadata.owner).toBe('api-team');
+      expect(result.spec.owner).toBe('api-team');
     });
   });
 
@@ -318,7 +317,7 @@ describe('defaultEntitySerializer', () => {
       expect(result).toBeDefined();
       expect(result.kind).toBe('System');
       expect(result.metadata.name).toBe('mocked-system');
-      expect(result.metadata.owner).toBe('system-team');
+      expect(result.spec.owner).toBe('system-team');
     });
   });
 
@@ -335,7 +334,7 @@ describe('defaultEntitySerializer', () => {
       expect(result).toBeDefined();
       expect(result.kind).toBe('Resource');
       expect(result.metadata.name).toBe('mocked-database');
-      expect(result.metadata.owner).toBe('database-team');
+      expect(result.spec.owner).toBe('database-team');
     });
   });
 
@@ -365,13 +364,13 @@ describe('defaultEntitySerializer', () => {
       mockedEntity = cloneDeep(defaultComponentEntity);
     });
 
-    it('should handle entities without relations', () => {
+    it('should define owner if defined in spec and not in relations', () => {
       delete mockedEntity.relations;
 
       const result = defaultEntitySerializer(mockedEntity);
 
       expect(result).toBeDefined();
-      expect(result.metadata.owner).toBeUndefined();
+      expect(result.spec.owner).toBe('mocked-team');
     });
 
     it('should handle entities without tags', () => {
