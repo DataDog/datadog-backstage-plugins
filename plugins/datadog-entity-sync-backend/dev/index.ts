@@ -2,7 +2,7 @@ import { createBackend } from '@backstage/backend-defaults';
 import { mockServices } from '@backstage/backend-test-utils';
 import { catalogServiceMock } from '@backstage/plugin-catalog-node/testUtils';
 
-import { datadogServiceFromComponentSerializer } from '../src/baseTransformExtension';
+import { datadogEntitySyncSerializer } from '../src/baseTransformExtension';
 
 import { MOCKED_ENTITIES } from './entities.mock';
 
@@ -27,6 +27,6 @@ backend.add(
 );
 
 backend.add(import('../src'));
-backend.add(datadogServiceFromComponentSerializer);
+backend.add(datadogEntitySyncSerializer);
 
 void backend.start();
