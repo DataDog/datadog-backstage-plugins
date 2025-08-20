@@ -5658,10 +5658,8 @@ __metadata:
     "@backstage/plugin-events-node": "npm:^0.4.11"
     "@cvent/backstage-plugin-datadog-entity-sync-node": "workspace:^"
     "@types/express": "npm:^4.17.21"
-    "@types/js-yaml": "npm:^4"
     express: "npm:^4.21.2"
     express-promise-router: "npm:^4.1.1"
-    js-yaml: "npm:^4.1.0"
   languageName: unknown
   linkType: soft
 
