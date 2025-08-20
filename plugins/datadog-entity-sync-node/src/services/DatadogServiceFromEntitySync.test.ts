@@ -1,3 +1,5 @@
+import yaml from 'js-yaml';
+
 import { v2 } from '@datadog/datadog-api-client';
 
 import { mockServices } from '@backstage/backend-test-utils';
@@ -81,15 +83,43 @@ const DEFAULT_RESPONSE = {
 describe('DatadogServiceFromEntitySync', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    global.fetch = jest.fn().mockResolvedValue({
+      ok: true,
+      status: 200,
+      json: () => Promise.resolve({ success: true }),
+    });
   });
 
   describe('with a custom serializer', () => {
+    const mockConfig = mockServices.rootConfig();
+    mockConfig.getString = jest.fn().mockImplementation((key: string) => {
+      switch (key) {
+        case 'datadog.integration.apiKey':
+          return 'test-api-key';
+        case 'datadog.integration.appKey':
+          return 'test-app-key';
+        default:
+          return undefined;
+      }
+    });
+    mockConfig.getOptionalString = jest
+      .fn()
+      .mockImplementation((key: string) => {
+        switch (key) {
+          case 'datadog.integration.site':
+            return 'datadoghq.com';
+          default:
+            return undefined;
+        }
+      });
+
     const sync = new DatadogServiceFromEntitySync(
       {
         datadog: new MockedSoftwareCatalogApi(),
         catalog: catalogServiceMock({ entities: MOCKED_ENTITIES }),
         auth: mockServices.auth.mock(),
         events: mockServices.events.mock(),
+        config: mockConfig,
       },
       {
         syncId: 'test',
@@ -119,18 +149,41 @@ describe('DatadogServiceFromEntitySync', () => {
       const syncedServices = await sync.sync();
 
       expect(syncedServices).toEqual(
-        Array(7).fill(JSON.stringify(DEFAULT_RESPONSE)),
+        Array(7).fill(yaml.dump(DEFAULT_RESPONSE)),
       );
     });
   });
 
   describe('with the default serializer', () => {
+    const mockConfig = mockServices.rootConfig();
+    mockConfig.getString = jest.fn().mockImplementation((key: string) => {
+      switch (key) {
+        case 'datadog.integration.apiKey':
+          return 'test-api-key';
+        case 'datadog.integration.appKey':
+          return 'test-app-key';
+        default:
+          return undefined;
+      }
+    });
+    mockConfig.getOptionalString = jest
+      .fn()
+      .mockImplementation((key: string) => {
+        switch (key) {
+          case 'datadog.integration.site':
+            return 'datadoghq.com';
+          default:
+            return undefined;
+        }
+      });
+
     const sync = new DatadogServiceFromEntitySync(
       {
         datadog: new MockedSoftwareCatalogApi(),
         catalog: catalogServiceMock({ entities: MOCKED_ENTITIES }),
         auth: mockServices.auth.mock(),
         events: mockServices.events.mock(),
+        config: mockConfig,
       },
       {
         syncId: 'test',
@@ -159,9 +212,7 @@ describe('DatadogServiceFromEntitySync', () => {
         metadata: { ...DEFAULT_RESPONSE.metadata, links: [] },
       } as const;
 
-      expect(syncedServices).toEqual(
-        Array(7).fill(JSON.stringify(mockedResponse)),
-      );
+      expect(syncedServices).toEqual(Array(7).fill(yaml.dump(mockedResponse)));
     });
   });
 });

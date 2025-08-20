@@ -1,10 +1,13 @@
 import { strict as assert } from 'node:assert';
 
+import yaml from 'js-yaml';
+
 import type { AuthService } from '@backstage/backend-plugin-api';
 import type { EntityFilterQuery } from '@backstage/catalog-client';
 import { CATALOG_FILTER_EXISTS } from '@backstage/catalog-client';
 import { stringifyEntityRef } from '@backstage/catalog-model';
 import type { Entity } from '@backstage/catalog-model';
+import type { Config } from '@backstage/config';
 import type { catalogServiceRef } from '@backstage/plugin-catalog-node';
 import type { EventParams, EventsService } from '@backstage/plugin-events-node';
 
@@ -27,6 +30,7 @@ interface Clients {
   catalog: typeof catalogServiceRef.T;
   auth: AuthService;
   events: EventsService;
+  config: Config;
 }
 
 export type SingleEntityFilterQuery<FIlter = EntityFilterQuery> =
@@ -146,11 +150,22 @@ export class DatadogServiceFromEntitySync<
       });
       try {
         const entityTitle = entity.metadata.title ?? entity.metadata.name;
-        const service = JSON.stringify(this.serialize(entity, preload));
+        const service = yaml.dump(this.serialize(entity, preload));
         assert(
           service,
           `The entity ${entityTitle} was unable to be processed.`,
         );
+
+        const apiKey = this.#clients.config.getString(
+          'datadog.integration.apiKey',
+        );
+        const appKey = this.#clients.config.getString(
+          'datadog.integration.appKey',
+        );
+        const site =
+          this.#clients.config.getOptionalString('datadog.integration.site') ??
+          'datadoghq.com';
+        const baseUrl = `https://api.${site}`;
 
         if (!this.#enabled || dryRun) {
           logger.info(
@@ -159,7 +174,14 @@ export class DatadogServiceFromEntitySync<
 
           yield service;
         } else {
-          yield await this.#clients.datadog.upsertCatalogEntity({
+          yield await fetch(`${baseUrl}/api/v2/catalog/entity`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'text/plain',
+              Accept: 'application/json',
+              'DD-API-KEY': apiKey,
+              'DD-APPLICATION-KEY': appKey,
+            },
             body: service,
           });
         }
