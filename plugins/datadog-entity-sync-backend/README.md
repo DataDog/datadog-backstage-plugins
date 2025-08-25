@@ -39,7 +39,7 @@ datadog:
     # This name must match the topic part name above and in the extension
     datadog-entities-from-catalog:
       entityFilter:
-        kind: ["component", "api", "system", "resource"]
+        kind: ['component', 'api', 'system', 'resource']
         # Adjust to your identifier in Datadog
         metadata.annotations.datadoghq.com/service-name: CATALOG_FILTER_EXISTS
       rateLimit:
@@ -232,7 +232,7 @@ The entity filter uses the standard Backstage entity filter format.
 
 ### Preview Serialized Entities
 
-The plugin provides a "serialize" endpoint that lets you preview how entities will appear in Datadog before they're actually synced. This is useful for testing and verification purposes. The endpoint accepts an optional `entityFilter` query parameter to filter the scope of entities serialized.  It uses the standard Backstage filter syntax.
+The plugin provides a "serialize" endpoint that lets you preview how entities will appear in Datadog before they're actually synced. This is useful for testing and verification purposes. The endpoint accepts an optional `entityFilter` query parameter to filter the scope of entities serialized. It uses the standard Backstage filter syntax.
 
 ```bash
 # Get all entities within the sync's configured scope
@@ -263,4 +263,4 @@ yarn start
 
 ## Troubleshooting
 
-Ensure that your node version is v22 or higher. 
+Ensure that your node version is v22 or higher.

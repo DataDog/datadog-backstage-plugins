@@ -1,2 +1,5 @@
 export { datadogServicesPlugin as default } from './plugin';
-export { datadogEntitySyncSerializer } from './baseTransformExtension';
+export {
+  datadogEntitySyncSerializer,
+  eventsBodyParser,
+} from './baseTransformExtension';
