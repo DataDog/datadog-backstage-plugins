@@ -50,8 +50,8 @@
     "jsonpath-plus": ">=10",
     "koa": ">=2",
     "tough-cookie": ">=4",
-    "@types/react": "^18",
-    "@types/react-dom": "^18"
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7"
   },
   "prettier": "@backstage/cli/config/prettier",
   "lint-staged": {
