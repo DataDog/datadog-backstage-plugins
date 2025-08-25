@@ -36,7 +36,7 @@
     "@backstage/cli": "^0.32.1",
     "@backstage/e2e-test-utils": "^0.1.1",
     "@playwright/test": "^1.52.0",
-    "@types/node": "^20.11.0",
+    "@types/node": "^20.19.10",
     "cspell": "^9.0.2",
     "eslint": "^8.50.0",
     "eslint-plugin-prettier": "^5.4.0",
