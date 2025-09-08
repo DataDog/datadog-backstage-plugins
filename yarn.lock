@@ -5679,10 +5679,8 @@ __metadata:
     "@backstage/types": "npm:^1.2.1"
     "@datadog/datadog-api-client": "npm:^1.35.0"
     "@types/git-url-parse": "npm:^16.0.2"
-    "@types/js-yaml": "npm:^4"
     "@types/lodash": "npm:^4.17.17"
     git-url-parse: "npm:^16.1.0"
-    js-yaml: "npm:^4.1.0"
     lodash: "npm:^4.17.21"
   peerDependencies:
     lodash: "*"
@@ -12635,7 +12633,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/js-yaml@npm:^4, @types/js-yaml@npm:^4.0.1":
+"@types/js-yaml@npm:^4.0.1":
   version: 4.0.9
   resolution: "@types/js-yaml@npm:4.0.9"
   checksum: 10c0/24de857aa8d61526bbfbbaa383aa538283ad17363fcd5bb5148e2c7f604547db36646440e739d78241ed008702a8920665d1add5618687b6743858fae00da211
