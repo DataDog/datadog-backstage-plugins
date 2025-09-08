@@ -8,10 +8,7 @@
 
 import { createBackend } from '@backstage/backend-defaults';
 
-import {
-  datadogEntitySyncSerializer,
-  eventsBodyParser,
-} from '@cvent/backstage-plugin-datadog-entity-sync-backend';
+import { datadogEntitySyncSerializer } from '@cvent/backstage-plugin-datadog-entity-sync-backend';
 
 import { datadogServiceFromComponentAndGroupSync } from './extensions/datadogServiceFromComponentAndGroupSync';
 
@@ -31,7 +28,6 @@ backend.add(import('@backstage/plugin-auth-backend-module-guest-provider'));
 
 // events plugin
 backend.add(import('@backstage/plugin-events-backend'));
-backend.add(eventsBodyParser);
 
 // catalog plugin
 backend.add(import('@backstage/plugin-catalog-backend'));
