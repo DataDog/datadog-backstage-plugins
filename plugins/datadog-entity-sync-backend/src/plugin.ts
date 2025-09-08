@@ -36,7 +36,6 @@ export const datadogServicesPlugin = createBackendPlugin({
         catalog: catalogServiceRef,
         datadog: datadogEntityRef,
         events: eventsServiceRef,
-        config: coreServices.rootConfig,
       },
       // eslint-disable-next-line @typescript-eslint/require-await
       async init({ logger, httpRouter, ...deps }) {
