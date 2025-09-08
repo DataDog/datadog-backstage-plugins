@@ -13,4 +13,8 @@ A Backstage plugin to sync entities from the Backstage catalog to [Datadog Softw
 
 ## Getting Started
 
-Check out the installation [instructions](./plugins/datadog-entity-sync-backend#installation) for enabling in your Backstage instance. You can also [customize](./plugins/datadog-entity-sync-backend#customization) how the plugin operates.
+Check out the installation [instructions](./plugins/datadog-entity-sync-backend#installation) for enabling in your Backstage instance.  You can also [customize](./plugins/datadog-entity-sync-backend#customization) how the plugin operates.
+
+## Credits
+
+Originally created at [Cvent](https://github.com/cvent)
