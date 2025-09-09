@@ -118,9 +118,7 @@ describe('DatadogServiceFromEntitySync', () => {
     it('returns expected public response', async () => {
       const syncedServices = await sync.sync();
 
-      expect(syncedServices).toEqual(
-        Array(7).fill(JSON.stringify(DEFAULT_RESPONSE)),
-      );
+      expect(syncedServices).toEqual(Array(7).fill(DEFAULT_RESPONSE));
     });
   });
 
@@ -159,9 +157,7 @@ describe('DatadogServiceFromEntitySync', () => {
         metadata: { ...DEFAULT_RESPONSE.metadata, links: [] },
       } as const;
 
-      expect(syncedServices).toEqual(
-        Array(7).fill(JSON.stringify(mockedResponse)),
-      );
+      expect(syncedServices).toEqual(Array(7).fill(mockedResponse));
     });
   });
 });

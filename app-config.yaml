@@ -18,7 +18,7 @@ backend:
     # Uncomment the following host directive to bind to specific interfaces
     # host: 127.0.0.1
   csp:
-    connect-src: ["'self'", 'http:', 'https:']
+    connect-src: ["'self'", "http:", "https:"]
     # Content-Security-Policy directives follow the Helmet format: https://helmetjs.github.io/#reference
     # Default Helmet Content-Security-Policy values can be removed by setting the key to false
   cors:
@@ -29,7 +29,7 @@ backend:
   # The production database configuration is stored in app-config.production.yaml
   database:
     client: better-sqlite3
-    connection: ':memory:'
+    connection: ":memory:"
   # workingDirectory: /tmp # Use this to configure a working directory for the scaffolder, defaults to the OS temp-dir
 
 # Reference documentation http://backstage.io/docs/features/techdocs/configuration
@@ -37,11 +37,11 @@ backend:
 # and an external cloud storage when deploying TechDocs for production use-case.
 # https://backstage.io/docs/features/techdocs/how-to-guides#how-to-migrate-from-techdocs-basic-to-recommended-deployment-approach
 techdocs:
-  builder: 'local' # Alternatives - 'external'
+  builder: "local" # Alternatives - 'external'
   generator:
-    runIn: 'docker' # Alternatives - 'local'
+    runIn: "docker" # Alternatives - 'local'
   publisher:
-    type: 'local' # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
+    type: "local" # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
 
 auth:
   # see https://backstage.io/docs/auth/ to learn about auth providers
@@ -92,15 +92,16 @@ permission:
 
 events:
   http:
-    topics:
-      - datadog-entity-sync.datadog-service-from-component-with-teams # this name has to mention the sync name below and in the extension.
+    topics: # this name has to mention the sync name below and in the extension.
+      - datadog-entity-sync.datadog-entities-from-catalog
+      - datadog-entity-sync.datadog-service-from-component-with-teams
 datadog:
   integration:
     apiKey: ${DD_API_KEY}
     appKey: ${DD_APP_KEY}
     site: datadoghq.com
   sync:
-    datadog-service-from-component-with-teams: # this name has to mention the topic part name above and in the extension.
+    datadog-entities-from-catalog: # this name has to mention the topic part name above and in the extension.
       entityFilter:
         kind: component
         metadata.annotations.datadoghq.com/service-name: CATALOG_FILTER_EXISTS # adjust to your identifier in datadog
@@ -110,7 +111,21 @@ datadog:
           minutes: 1
       schedule:
         frequency:
-          cron: '1 1 * * *' # set to your schedule
+          cron: "1 1 * * *" # set to your schedule
+        timeout:
+          minutes: 10
+      enabled: false # change to true in production
+    datadog-service-from-component-with-teams:
+      entityFilter:
+        kind: component
+        metadata.annotations.datadoghq.com/service-name: CATALOG_FILTER_EXISTS # adjust to your identifier in datadog
+      rateLimit:
+        count: 60
+        interval:
+          minutes: 1
+      schedule:
+        frequency:
+          cron: "1 1 * * *" # set to your schedule
         timeout:
           minutes: 10
       enabled: false # change to true in production
