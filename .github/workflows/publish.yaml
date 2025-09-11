@@ -6,12 +6,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: install-build-tools
+        uses: jdx/mise-action@d20b46e041ee9e28e7b67d713f4df93a72358b54
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: "18.x"
+          node-version: "22.x"
+      - run: yarn
       - run: yarn config set npmAuthToken $NPM_PUBLISH_TOKEN
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-      - run: yarn
       - run: yarn npm publish
