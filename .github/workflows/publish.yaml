@@ -16,7 +16,7 @@ jobs:
           registry-url: "https://registry.npmjs.org"
       - run: corepack enable
       - run: yarn
-      - run: yarn npm publish --access public
+      - run: yarn npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
           YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
