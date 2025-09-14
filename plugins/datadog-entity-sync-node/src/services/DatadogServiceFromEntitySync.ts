@@ -8,15 +8,15 @@ import type { Entity } from '@backstage/catalog-model';
 import type { catalogServiceRef } from '@backstage/plugin-catalog-node';
 import type { EventParams, EventsService } from '@backstage/plugin-events-node';
 
-import type { BaseScheduledSyncOptions } from '@cvent/backstage-plugin-datadog-entity-sync-node';
+import type { BaseScheduledSyncOptions } from '@datadog/backstage-plugin-datadog-entity-sync-node';
 import type {
   DatadogEntityDefinition,
   datadogEntityRef,
-} from '@cvent/backstage-plugin-datadog-entity-sync-node';
+} from '@datadog/backstage-plugin-datadog-entity-sync-node';
 import {
   BaseScheduledSync,
   defaultEntitySerializer,
-} from '@cvent/backstage-plugin-datadog-entity-sync-node';
+} from '@datadog/backstage-plugin-datadog-entity-sync-node';
 
 import type { SyncConfig } from '../extensions';
 import type { RateLimit } from '../utils/byChunk';

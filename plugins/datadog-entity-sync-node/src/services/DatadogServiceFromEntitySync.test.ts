@@ -1,7 +1,7 @@
-import { v2 } from '@datadog/datadog-api-client';
-
 import { mockServices } from '@backstage/backend-test-utils';
 import { catalogServiceMock } from '@backstage/plugin-catalog-node/testUtils';
+
+import { v2 } from '@datadog/datadog-api-client';
 
 import { defaultEntitySerializer } from '../transforms/defaultEntitySerializer';
 

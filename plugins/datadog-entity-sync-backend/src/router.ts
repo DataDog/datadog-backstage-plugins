@@ -8,7 +8,7 @@ import { InputError, NotFoundError } from '@backstage/errors';
 import type {
   DatadogServiceFromEntitySync,
   SingleEntityFilterQuery,
-} from '@cvent/backstage-plugin-datadog-entity-sync-node';
+} from '@datadog/backstage-plugin-datadog-entity-sync-node';
 
 export function createRouter({
   datadogSyncs,

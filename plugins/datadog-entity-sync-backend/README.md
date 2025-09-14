@@ -4,11 +4,11 @@ This plugin backend is used to sync a Backstage catalog with a Datadog service c
 
 ## Installation
 
-This plugin is installed via the `@cvent/backstage-plugin-datadog-entity-sync-backend` package. To install it to your backend package, run the following command:
+This plugin is installed via the `@datadog/backstage-plugin-datadog-entity-sync-backend` package. To install it to your backend package, run the following command:
 
 ```bash
 # From your root directory
-yarn workspace backend add @cvent/backstage-plugin-datadog-entity-sync-backend
+yarn workspace backend add @datadog/backstage-plugin-datadog-entity-sync-backend
 ```
 
 Then add the plugin to your backend in `packages/backend/src/index.ts`:
@@ -16,7 +16,7 @@ Then add the plugin to your backend in `packages/backend/src/index.ts`:
 ```typescript
 const backend = createBackend();
 // ...
-backend.add(import('@cvent/backstage-plugin-datadog-entity-sync-backend'));
+backend.add(import('@datadog/backstage-plugin-datadog-entity-sync-backend'));
 ```
 
 ## Configuration
@@ -60,13 +60,13 @@ In order to customize what entities are synced to Datadog and how the entities a
 
 ### Basic Configuration
 
-This is the base extension point included in the `@cvent/backstage-plugin-datadog-entity-sync-backend` package. You can add it to your backend as follows:
+This is the base extension point included in the `@datadog/backstage-plugin-datadog-entity-sync-backend` package. You can add it to your backend as follows:
 
 ```typescript
-import { datadogEntitySyncSerializer } from '@cvent/backstage-plugin-datadog-entity-sync-backend';
+import { datadogEntitySyncSerializer } from '@datadog/backstage-plugin-datadog-entity-sync-backend';
 const backend = createBackend();
 // ...
-backend.add(import('@cvent/backstage-plugin-datadog-entity-sync-backend'));
+backend.add(import('@datadog/backstage-plugin-datadog-entity-sync-backend'));
 backend.add(defaultEntitySerializer);
 ```
 
@@ -81,8 +81,8 @@ import {
   SchedulerServiceTaskScheduleDefinition,
 } from '@backstage/backend-plugin-api';
 import { EntityFilterQuery } from '@backstage/catalog-client';
-import { defaultComponentSerializer } from '@cvent/backstage-plugin-datadog-entity-sync-node';
-import { datadogEntitySyncExtensionPoint } from '@cvent/backstage-plugin-datadog-entity-sync-node';
+import { defaultComponentSerializer } from '@datadog/backstage-plugin-datadog-entity-sync-node';
+import { datadogEntitySyncExtensionPoint } from '@datadog/backstage-plugin-datadog-entity-sync-node';
 
 const SYNC_ID = 'datadog-service-from-component';
 
@@ -132,8 +132,8 @@ import {
 } from '@backstage/catalog-model';
 import { catalogServiceRef } from '@backstage/plugin-catalog-node';
 
-import type { DatadogEntitySyncConfig } from '@cvent/backstage-plugin-datadog-entity-sync-node';
-import { datadogEntitySyncExtensionPoint } from '@cvent/backstage-plugin-datadog-entity-sync-node';
+import type { DatadogEntitySyncConfig } from '@datadog/backstage-plugin-datadog-entity-sync-node';
+import { datadogEntitySyncExtensionPoint } from '@datadog/backstage-plugin-datadog-entity-sync-node';
 
 const SYNC_ID = 'datadog-service-from-component-with-teams';
 

@@ -1,10 +1,10 @@
-import { client, v2 } from '@datadog/datadog-api-client';
-
 import {
   coreServices,
   createServiceFactory,
   createServiceRef,
 } from '@backstage/backend-plugin-api';
+
+import { client, v2 } from '@datadog/datadog-api-client';
 
 export type DatadogEntityDefinition = v2.EntityV3;
 

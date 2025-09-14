@@ -8,7 +8,7 @@
 
 import { createBackend } from '@backstage/backend-defaults';
 
-import { datadogEntitySyncSerializer } from '@cvent/backstage-plugin-datadog-entity-sync-backend';
+import { datadogEntitySyncSerializer } from '@datadog/backstage-plugin-datadog-entity-sync-backend';
 
 import { datadogServiceFromComponentAndGroupSync } from './extensions/datadogServiceFromComponentAndGroupSync';
 
@@ -57,7 +57,7 @@ backend.add(import('@backstage/plugin-search-backend-module-catalog'));
 backend.add(import('@backstage/plugin-search-backend-module-techdocs'));
 
 // datadog plugins
-backend.add(import('@cvent/backstage-plugin-datadog-entity-sync-backend'));
+backend.add(import('@datadog/backstage-plugin-datadog-entity-sync-backend'));
 backend.add(datadogServiceFromComponentAndGroupSync);
 backend.add(datadogEntitySyncSerializer);
 

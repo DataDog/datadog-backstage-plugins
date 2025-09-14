@@ -3,11 +3,11 @@ import {
   createBackendModule,
 } from '@backstage/backend-plugin-api';
 
-import type { DatadogEntitySyncConfig } from '@cvent/backstage-plugin-datadog-entity-sync-node';
+import type { DatadogEntitySyncConfig } from '@datadog/backstage-plugin-datadog-entity-sync-node';
 import {
   datadogEntitySyncExtensionPoint,
   defaultEntitySerializer,
-} from '@cvent/backstage-plugin-datadog-entity-sync-node';
+} from '@datadog/backstage-plugin-datadog-entity-sync-node';
 
 const SYNC_ID = 'datadog-entities-from-catalog';
 

@@ -1,5 +1,5 @@
 {
-  "name": "@cvent/datadog-backstage-plugins",
+  "name": "@datadog/datadog-backstage-plugins",
   "version": "1.0.0",
   "private": true,
   "engines": {

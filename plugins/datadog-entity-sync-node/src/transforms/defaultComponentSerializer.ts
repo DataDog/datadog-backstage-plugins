@@ -1,7 +1,5 @@
 import gitUrlParse from 'git-url-parse';
 
-import type { EntityV3Service } from '@datadog/datadog-api-client/dist/packages/datadog-api-client-v2';
-
 import type { ComponentEntity, Entity } from '@backstage/catalog-model';
 import {
   ANNOTATION_SOURCE_LOCATION,
@@ -14,7 +12,8 @@ import {
 } from '@backstage/catalog-model';
 import { TECHDOCS_ANNOTATION } from '@backstage/plugin-techdocs-common';
 
-import { valueGuard } from '@cvent/backstage-plugin-datadog-entity-sync-node';
+import { valueGuard } from '@datadog/backstage-plugin-datadog-entity-sync-node';
+import type { EntityV3Service } from '@datadog/datadog-api-client/dist/packages/datadog-api-client-v2';
 
 function ensureComponent(
   entity: Entity | ComponentEntity,

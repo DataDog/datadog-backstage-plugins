@@ -8,8 +8,8 @@ import type {
 import type {
   DatadogEntityDefinition,
   ExtraSerializationInfo,
-} from '@cvent/backstage-plugin-datadog-entity-sync-node';
-import { defaultComponentSerializer } from '@cvent/backstage-plugin-datadog-entity-sync-node';
+} from '@datadog/backstage-plugin-datadog-entity-sync-node';
+import { defaultComponentSerializer } from '@datadog/backstage-plugin-datadog-entity-sync-node';
 
 interface GroupWithContacts extends GroupEntity {
   spec: GroupEntity['spec'] & {

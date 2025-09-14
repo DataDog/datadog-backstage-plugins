@@ -5,12 +5,12 @@ import {
 import { catalogServiceRef } from '@backstage/plugin-catalog-node';
 import { eventsServiceRef } from '@backstage/plugin-events-node';
 
-import type { DatadogServiceFromEntitySerializer } from '@cvent/backstage-plugin-datadog-entity-sync-node';
+import type { DatadogServiceFromEntitySerializer } from '@datadog/backstage-plugin-datadog-entity-sync-node';
 import {
   datadogEntityRef,
   DatadogServiceFromEntitySync,
-} from '@cvent/backstage-plugin-datadog-entity-sync-node';
-import { datadogEntitySyncExtensionPoint } from '@cvent/backstage-plugin-datadog-entity-sync-node';
+} from '@datadog/backstage-plugin-datadog-entity-sync-node';
+import { datadogEntitySyncExtensionPoint } from '@datadog/backstage-plugin-datadog-entity-sync-node';
 
 import { createRouter } from './router';
 

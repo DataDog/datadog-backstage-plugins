@@ -1,5 +1,5 @@
 {
-  "name": "@cvent/backstage-plugin-datadog-entity-sync-node",
+  "name": "@datadog/backstage-plugin-datadog-entity-sync-node",
   "version": "0.1.0",
   "license": "Apache-2.0",
   "private": true,
