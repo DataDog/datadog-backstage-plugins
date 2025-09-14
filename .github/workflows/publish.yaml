@@ -16,7 +16,16 @@ jobs:
           registry-url: "https://registry.npmjs.org"
       - run: corepack enable
       - run: yarn
-      - run: yarn npm publish --access public
+      - name: Build all packages
+        run: yarn build:all
+      - name: Publish datadog-entity-sync-node
+        run: cd plugins/datadog-entity-sync-node && yarn npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+          YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+          COREPACK_ENABLE_DOWNLOAD_PROMPT: 0
+      - name: Publish datadog-entity-sync-backend
+        run: cd plugins/datadog-entity-sync-backend && yarn npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
           YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
