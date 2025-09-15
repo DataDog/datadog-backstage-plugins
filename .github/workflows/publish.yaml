@@ -16,8 +16,6 @@ jobs:
           registry-url: "https://registry.npmjs.org"
       - run: corepack enable
       - run: yarn
-      - name: Run tsc
-        run: yarn tsc
       - name: Build all packages
         run: yarn build:all
       - run: |
