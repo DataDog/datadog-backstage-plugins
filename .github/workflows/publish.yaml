@@ -20,12 +20,13 @@ jobs:
         run: yarn tsc
       - name: Build all packages
         run: yarn build:all
-      - run: yarn config set npmAuthToken $NPM_PUBLISH_TOKEN
+      - run: yarn config set npmAuthToken "${NPM_PUBLISH_TOKEN}"
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
       - name: Publish datadog-entity-sync-node
         run: cd plugins/datadog-entity-sync-node && yarn npm publish --access public
         env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
           YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
           COREPACK_ENABLE_DOWNLOAD_PROMPT: 0
