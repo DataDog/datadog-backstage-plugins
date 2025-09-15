@@ -24,14 +24,14 @@ jobs:
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
       - name: Publish datadog-entity-sync-node
-        run: cd plugins/datadog-entity-sync-node && yarn npm publish --access public
+        run: yarn workspace @datadog/backstage-plugin-datadog-entity-sync-node npm publish --access public
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
           YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
           COREPACK_ENABLE_DOWNLOAD_PROMPT: 0
       - name: Publish datadog-entity-sync-backend
-        run: cd plugins/datadog-entity-sync-backend && yarn npm publish --access public
+        run: yarn workspace @datadog/backstage-plugin-datadog-entity-sync-backend npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
           YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
