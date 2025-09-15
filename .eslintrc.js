@@ -52,7 +52,7 @@ module.exports = {
             position: 'before',
           },
           {
-            pattern: '@cvent/**',
+            pattern: '@datadog/**',
             group: 'internal',
             position: 'before',
           },

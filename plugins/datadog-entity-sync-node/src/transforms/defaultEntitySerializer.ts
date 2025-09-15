@@ -21,7 +21,7 @@ import {
 } from '@backstage/catalog-model';
 import { TECHDOCS_ANNOTATION } from '@backstage/plugin-techdocs-common';
 
-import { valueGuard } from '@cvent/backstage-plugin-datadog-entity-sync-node';
+import { valueGuard } from '@datadog/backstage-plugin-datadog-entity-sync-node';
 
 function ensureEntity(
   entity: Entity | ComponentEntity | ApiEntity | SystemEntity | ResourceEntity,

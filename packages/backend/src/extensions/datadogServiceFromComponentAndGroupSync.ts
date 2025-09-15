@@ -8,8 +8,8 @@ import {
 } from '@backstage/catalog-model';
 import { catalogServiceRef } from '@backstage/plugin-catalog-node';
 
-import type { DatadogEntitySyncConfig } from '@cvent/backstage-plugin-datadog-entity-sync-node';
-import { datadogEntitySyncExtensionPoint } from '@cvent/backstage-plugin-datadog-entity-sync-node';
+import type { DatadogEntitySyncConfig } from '@datadog/backstage-plugin-datadog-entity-sync-node';
+import { datadogEntitySyncExtensionPoint } from '@datadog/backstage-plugin-datadog-entity-sync-node';
 
 import { datadogServiceFromComponentAndGroupSerializer } from './datadogServiceFromComponentAndGroupSerializer';
 

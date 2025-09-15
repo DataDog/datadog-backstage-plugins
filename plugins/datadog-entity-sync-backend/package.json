@@ -1,8 +1,8 @@
 {
-  "name": "@cvent/backstage-plugin-datadog-entity-sync-backend",
+  "name": "@datadog/backstage-plugin-datadog-entity-sync-backend",
   "version": "0.1.0",
   "license": "Apache-2.0",
-  "private": true,
+  "private": false,
   "main": "src/index.ts",
   "types": "src/index.ts",
   "publishConfig": {
@@ -28,7 +28,7 @@
     "@backstage/errors": "^1.2.7",
     "@backstage/plugin-catalog-node": "^1.18.0",
     "@backstage/plugin-events-node": "^0.4.14",
-    "@cvent/backstage-plugin-datadog-entity-sync-node": "workspace:^",
+    "@datadog/backstage-plugin-datadog-entity-sync-node": "workspace:^",
     "express": "^4.21.2",
     "express-promise-router": "^4.1.1"
   },

@@ -37,8 +37,8 @@
     "@backstage/plugin-search-backend-module-pg": "^0.5.47",
     "@backstage/plugin-search-backend-module-techdocs": "^0.4.5",
     "@backstage/plugin-techdocs-backend": "^2.0.5",
-    "@cvent/backstage-plugin-datadog-entity-sync-backend": "workspace:^",
-    "@cvent/backstage-plugin-datadog-entity-sync-node": "workspace:^",
+    "@datadog/backstage-plugin-datadog-entity-sync-backend": "workspace:^",
+    "@datadog/backstage-plugin-datadog-entity-sync-node": "workspace:^",
     "app": "link:../app",
     "better-sqlite3": "^12.2.0",
     "node-gyp": "^11.4.2"
