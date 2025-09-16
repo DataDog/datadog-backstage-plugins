@@ -16,10 +16,7 @@ jobs:
           node-version: "22.x"
           registry-url: "https://registry.npmjs.org"
       - run: corepack enable
-      - run: |
-          yarn config set 'npmScopes.datadog.npmRegistryServer' "https://registry.npmjs.org"
-          yarn config set 'npmScopes.datadog.npmPublishRegistry' "https://registry.npmjs.org"
-          yarn config set 'npmScopes.datadog.npmAuthToken' "${NPM_PUBLISH_TOKEN}"
+      - run: yarn config set npmAuthToken $NPM_PUBLISH_TOKEN
       - run: yarn
       - name: Run tsc
         run: yarn tsc
