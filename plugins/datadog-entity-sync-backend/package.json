@@ -10,7 +10,12 @@
     "types": "dist/index.d.ts"
   },
   "backstage": {
-    "role": "backend-plugin"
+    "role": "backend-plugin",
+    "pluginId": "datadog-entity-sync",
+    "pluginPackages": [
+      "@datadog/backstage-plugin-datadog-entity-sync-backend",
+      "@datadog/backstage-plugin-datadog-entity-sync-node"
+    ]
   },
   "scripts": {
     "start": "backstage-cli package start",
