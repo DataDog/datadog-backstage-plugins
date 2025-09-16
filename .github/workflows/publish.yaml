@@ -27,6 +27,8 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+      - name: Generate Backstage package metadata
+        run: yarn backstage-cli repo fix --check --publish
       - name: Publish datadog-entity-sync-node
         run: yarn workspace @datadog/backstage-plugin-datadog-entity-sync-node npm publish --access public
         env:
