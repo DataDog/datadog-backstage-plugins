@@ -6,6 +6,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - name: install-build-tools
         uses: jdx/mise-action@d20b46e041ee9e28e7b67d713f4df93a72358b54
