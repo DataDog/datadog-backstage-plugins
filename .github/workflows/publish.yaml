@@ -15,15 +15,15 @@ jobs:
           node-version: "22.x"
           registry-url: "https://registry.npmjs.org"
       - run: corepack enable
+      - run: |
+          yarn config set 'npmScopes.datadog.npmRegistryServer' "https://registry.npmjs.org"
+          yarn config set 'npmScopes.datadog.npmPublishRegistry' "https://registry.npmjs.org"
+          yarn config set 'npmScopes.datadog.npmAuthToken' "${NPM_PUBLISH_TOKEN}"
       - run: yarn
       - name: Run tsc
         run: yarn tsc
       - name: Build all packages
         run: yarn build:all
-      - run: |
-          yarn config set 'npmScopes.datadog.npmRegistryServer' "https://registry.npmjs.org"
-          yarn config set 'npmScopes.datadog.npmPublishRegistry' "https://registry.npmjs.org"
-          yarn config set 'npmScopes.datadog.npmAuthToken' "${NPM_PUBLISH_TOKEN}"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
