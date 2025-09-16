@@ -2,7 +2,6 @@
   "name": "@datadog/backstage-plugin-datadog-entity-sync-backend",
   "version": "0.1.0",
   "license": "Apache-2.0",
-  "private": false,
   "main": "src/index.ts",
   "types": "src/index.ts",
   "publishConfig": {

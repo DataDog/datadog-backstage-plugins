@@ -15,19 +15,25 @@ jobs:
           node-version: "22.x"
           registry-url: "https://registry.npmjs.org"
       - run: corepack enable
+      - run: |
+          yarn config set 'npmScopes.datadog.npmRegistryServer' "https://registry.npmjs.org"
+          yarn config set 'npmScopes.datadog.npmPublishRegistry' "https://registry.npmjs.org"
+          yarn config set 'npmScopes.datadog.npmAuthToken' "${NPM_PUBLISH_TOKEN}"
       - run: yarn
       - name: Run tsc
         run: yarn tsc
       - name: Build all packages
         run: yarn build:all
-      - run: yarn config set npmAuthToken "${NPM_PUBLISH_TOKEN}"
         env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
       - name: Publish datadog-entity-sync-node
         run: yarn workspace @datadog/backstage-plugin-datadog-entity-sync-node npm publish --access public
         env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
           COREPACK_ENABLE_DOWNLOAD_PROMPT: 0
       - name: Publish datadog-entity-sync-backend
         run: yarn workspace @datadog/backstage-plugin-datadog-entity-sync-backend npm publish --access public
         env:
+          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
           COREPACK_ENABLE_DOWNLOAD_PROMPT: 0
