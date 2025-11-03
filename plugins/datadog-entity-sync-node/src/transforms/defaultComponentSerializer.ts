@@ -12,8 +12,9 @@ import {
 } from '@backstage/catalog-model';
 import { TECHDOCS_ANNOTATION } from '@backstage/plugin-techdocs-common';
 
-import { valueGuard } from '@datadog/backstage-plugin-datadog-entity-sync-node';
-import type { EntityV3Service } from '@datadog/datadog-api-client/dist/packages/datadog-api-client-v2';
+import type { v2 } from '@datadog/datadog-api-client';
+
+import { valueGuard } from '../utils/byChunk';
 
 function ensureComponent(
   entity: Entity | ComponentEntity,
@@ -179,5 +180,5 @@ export function defaultComponentSerializer(
         ],
       },
     })),
-  } as EntityV3Service;
+  } as v2.EntityV3Service;
 }

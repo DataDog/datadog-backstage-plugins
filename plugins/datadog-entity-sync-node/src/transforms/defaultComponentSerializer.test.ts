@@ -2,7 +2,7 @@ import { cloneDeep } from 'lodash';
 
 import type { Entity } from '@backstage/catalog-model';
 
-import type { EntityV3Service } from '@datadog/datadog-api-client/dist/packages/datadog-api-client-v2';
+import type { v2 } from '@datadog/datadog-api-client';
 
 import type { ExtraSerializationInfo } from './defaultComponentSerializer';
 import { defaultComponentSerializer } from './defaultComponentSerializer';
@@ -53,10 +53,10 @@ describe('defaultComponentSerializer', () => {
             'tag1:value1',
             'tag2:value2',
           ]) as string[],
-        }) as EntityV3Service['metadata'],
+        }) as v2.EntityV3Service['metadata'],
         spec: expect.objectContaining({
           lifecycle: 'production',
-        }) as EntityV3Service['spec'],
+        }) as v2.EntityV3Service['spec'],
       }),
     );
   });
@@ -219,7 +219,7 @@ describe('defaultComponentSerializer', () => {
               'packages/package-name/**',
             ]) as string[],
           },
-        ]) as EntityV3Service['datadog'],
+        ]) as v2.EntityV3Service['datadog'],
       }),
     );
   });
