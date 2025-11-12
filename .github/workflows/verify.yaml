@@ -19,9 +19,9 @@ jobs:
         uses: actions/checkout@85e6279cec87321a52edac9c87bce653a07cf6c2
       - name: install-build-tools
         uses: jdx/mise-action@d20b46e041ee9e28e7b67d713f4df93a72358b54
-      - name: install-dependencies
-        run: yarn install
       - name: enable-corepack
         run: corepack enable
+      - name: install-dependencies
+        run: yarn install
       - name: verify-project
         run: yarn verify
