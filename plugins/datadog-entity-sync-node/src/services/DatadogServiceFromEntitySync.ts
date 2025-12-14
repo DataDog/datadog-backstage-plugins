@@ -30,8 +30,7 @@ export type SingleEntityFilterQuery<FIlter = EntityFilterQuery> =
   FIlter extends (infer SingleFilter)[] ? SingleFilter : FIlter;
 
 export interface DatadogServiceFromEntitySyncOptions<Preload = unknown>
-  extends BaseScheduledSyncOptions,
-    Omit<SyncConfig, 'schedule'> {
+  extends BaseScheduledSyncOptions, Omit<SyncConfig, 'schedule'> {
   serialize?: (
     entity: Entity,
     preload: Preload,

@@ -34,7 +34,7 @@
     "@backstage/plugin-events-node": "^0.4.17",
     "@backstage/plugin-techdocs-common": "^0.1.1",
     "@backstage/types": "^1.2.2",
-    "@datadog/datadog-api-client": "^1.41.0",
+    "@datadog/datadog-api-client": "^1.48.0",
     "git-url-parse": "^16.1.0"
   },
   "peerDependencies": {
@@ -44,7 +44,7 @@
     "@backstage/backend-test-utils": "^1.10.1",
     "@backstage/cli": "^0.34.5",
     "@types/git-url-parse": "^16.0.2",
-    "@types/lodash": "^4.17.20",
+    "@types/lodash": "^4.17.21",
     "lodash": "^4.17.21"
   },
   "files": [

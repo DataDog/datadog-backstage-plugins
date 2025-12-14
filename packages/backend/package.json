@@ -40,8 +40,8 @@
     "@datadog/backstage-plugin-datadog-entity-sync-backend": "workspace:^",
     "@datadog/backstage-plugin-datadog-entity-sync-node": "workspace:^",
     "app": "link:../app",
-    "better-sqlite3": "^12.2.0",
-    "node-gyp": "^11.4.2"
+    "better-sqlite3": "^12.5.0",
+    "node-gyp": "^12.1.0"
   },
   "devDependencies": {
     "@backstage/cli": "^0.34.5"

@@ -58,8 +58,8 @@ function isGroupWithContacts(
 ): team is GroupWithContacts {
   return Boolean(
     team &&
-      isGroupEntity(team) &&
-      'contacts' in team.spec &&
-      Array.isArray(team.spec.contacts),
+    isGroupEntity(team) &&
+    'contacts' in team.spec &&
+    Array.isArray(team.spec.contacts),
   );
 }

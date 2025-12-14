@@ -33,13 +33,13 @@
     "@backstage/plugin-catalog-node": "^1.20.0",
     "@backstage/plugin-events-node": "^0.4.17",
     "@datadog/backstage-plugin-datadog-entity-sync-node": "workspace:^",
-    "express": "^4.21.2",
+    "express": "^4.22.1",
     "express-promise-router": "^4.1.1"
   },
   "devDependencies": {
     "@backstage/backend-test-utils": "^1.10.1",
     "@backstage/cli": "^0.34.5",
-    "@types/express": "^4.17.23"
+    "@types/express": "^4.17.25"
   },
   "files": [
     "dist"
