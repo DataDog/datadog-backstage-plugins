@@ -40,7 +40,10 @@ export const datadogServicesPlugin = createBackendPlugin({
       // eslint-disable-next-line @typescript-eslint/require-await
       async init({ logger, httpRouter, ...deps }) {
         const datadogSyncs = new Map(
-          serializers.entries().map(([id, serializer]) => [
+          // Iterator.prototype.map() was introduced in Node 22.
+          // Converting it to an array first for compatibility with pre node 22 runtimes.
+          // serializers.entries().map(([id, serializer]) => [
+          Array.from(serializers.entries()).map(([id, serializer]) => [
             id,
             new DatadogServiceFromEntitySync(deps, {
               ...serializer,

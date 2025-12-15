@@ -7,12 +7,21 @@ export interface RateLimit {
   interval?: HumanDuration;
 }
 
-export function byChunkAsync<Items, ReturnType>(
+export async function byChunkAsync<Items, ReturnType>(
   items: Items[],
   rate: RateLimit,
   method: (chunk: Items[]) => AsyncGenerator<ReturnType>,
 ) {
-  return Array.fromAsync(byChunk(items, rate, method));
+  // Array.fromAsync was introduced in Node 22.
+  // Removed in favor of manual implementation for compatibility with pre node 22 runtimes.
+  // return Array.fromAsync(byChunk(items, rate, method));
+  const result = [];
+
+  for await (const item of byChunk(items, rate, method)) {
+    result.push(item);
+  }
+
+  return result;
 }
 
 export async function* byChunk<Items, ReturnType>(
