@@ -7,35 +7,30 @@ jobs:
   build:
     runs-on: ubuntu-latest
     environment: production
+    permissions:
+      id-token: write
     steps:
       - name: install-build-tools
         uses: jdx/mise-action@d20b46e041ee9e28e7b67d713f4df93a72358b54
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '22.x'
+          node-version: '24.x'
           registry-url: 'https://registry.npmjs.org'
       - run: corepack enable
       - run: yarn config set npmAuthToken $NPM_PUBLISH_TOKEN
-        env:
-          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
       - run: yarn
       - name: Run tsc
         run: yarn tsc
       - name: Build all packages
         run: yarn build:all
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
       - name: Generate Backstage package metadata
         run: yarn backstage-cli repo fix --check --publish
       - name: Publish datadog-entity-sync-node
         run: yarn workspace @datadog/backstage-plugin-datadog-entity-sync-node npm publish --access public
         env:
-          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
           COREPACK_ENABLE_DOWNLOAD_PROMPT: 0
       - name: Publish datadog-entity-sync-backend
         run: yarn workspace @datadog/backstage-plugin-datadog-entity-sync-backend npm publish --access public
         env:
-          NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
           COREPACK_ENABLE_DOWNLOAD_PROMPT: 0
