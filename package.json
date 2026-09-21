@@ -50,7 +50,9 @@
     "isolated-vm": ">=6",
     "jsonpath-plus": ">=10",
     "koa": ">=2",
-    "tough-cookie": ">=4"
+    "tough-cookie": ">=4",
+    "dompurify@npm:=3.2.6": "npm:^3.4.15",
+    "fast-xml-parser@npm:5.2.5": "npm:^5.11.1"
   },
   "prettier": "@backstage/cli/config/prettier",
   "lint-staged": {
